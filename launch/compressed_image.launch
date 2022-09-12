@@ -1,0 +1,16 @@
+<launch>
+    <arg name = "color_intensity" default= "[5,5,5]"/>
+    <param name = "color_intensity"  value="$(arg color_intensity)" />
+
+    <!-- streaming digit image -->
+    <node pkg="digit-interface-ros" type="ros_digit_stream.py" name="ros_digit_stream" output="screen" />
+
+
+    <!-- compressing image from Image to CompressedImage -->
+    <node pkg="image_transport" type="republish" name="repub_left" output="screen" 
+      args="raw in:=/finger_left compressed out:=/finger_left "/>
+    <node pkg="image_transport" type="republish" name="repub_right" output="screen" 
+      args="raw in:=/finger_right compressed out:=/finger_right "/>
+        
+</launch>
+
